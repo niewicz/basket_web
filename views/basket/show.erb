@@ -1,0 +1,29 @@
+<h2> Basket </h2>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% basket.each do |basket_item| %>
+      <tr>
+        <td><%= basket_item.get_details.name %></td>
+        <td><%= basket_item.get_details.price %></td>
+        <td><%= basket_item.quantity %></td>
+        <td><%= basket_item.total_net %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Summary:</td>
+      <td></td>
+  </tfoot>
+</table>

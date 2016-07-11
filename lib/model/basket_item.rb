@@ -9,6 +9,18 @@ module Shop
       @quantity = check_quantity(quantity)
     end
 
+    def total_net
+      @quantity * get_details.price
+    end
+
+    def total_gross
+      total_net * (1 + get_details.vat)
+    end
+
+    def get_details
+      FetchProduct.new.call(@product_id)
+    end
+
     private
     def check_id(id)
       id

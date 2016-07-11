@@ -17,24 +17,28 @@ module Shop
 
   class App < Sinatra::Base
     get "/" do
-      erb :index
+      CreateWarehouseItem.new.call(1, 10)
+      CreateWarehouseItem.new.call(2, 15)
+      CreateWarehouseItem.new.call(3, 5)
+      portfolio = FetchPortfolio.new.call
+      erb :"products/index", locals: {portfolio: portfolio, title: "Our products"}
+    end
+
+    get "/products/:id" do |id|
+      product = FetchProduct.new.call(id)
+      warehouse_item = FetchWarehouseItem.new.call(id)
+      erb :"products/show", locals: {product: product, quantity: warehouse_item.quantity}
+    end
+
+    get "/basket" do
+      basket = FetchBasket.new.call
+      erb :"basket/show", locals: {basket: basket}
+    end
+
+    post "/basket" do
+      CreateBasketItem.new(params).call
+      redirect "/"
     end
   end
 
 end
-
-#Shop::Main.run
-#Shop::CreateBasketItem.new.call(1, 20)
-#Shop::CreateBasketItem.new.call(2, 3)
-#Shop::CreateBasketItem.new.call(3, 1)
-#p Shop::BASKET
-#p "\n"
-#p Shop::WAREHOUSE
-#p "\n"
-#Shop::DeleteBasketItem.new.call(1, 2)
-#Shop::DeleteBasketItem.new.call(2, 2)
-#Shop::DeleteBasketItem.new.call(3, 1)
-#p "\n"
-#p Shop::BASKET
-#p "\n"
-#p Shop::WAREHOUSE
