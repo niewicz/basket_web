@@ -3,6 +3,7 @@
 <table width="100%">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Price</th>
       <th>Quantity</th>
@@ -13,6 +14,13 @@
   <tbody>
     <% basket_summary.products_list.each do |list_item| %>
       <tr>
+        <td>
+          <form action="/basket/delete" method="post">
+            <input type="hidden" name="product_id" value="<%= list_item[:product].id %>">
+            <input type="hidden" name="quantity" value="<%= list_item[:quantity] %>">
+            <input type="submit" value="Remove">
+          </form>
+        </td>
         <td><%= list_item[:product].name %></td>
         <td><%= "%.2f" % list_item[:product].price %> PLN</td>
         <td><%= list_item[:quantity] %></td>
@@ -20,11 +28,12 @@
         <td><%= "%.2f" % list_item[:total_gross] %> PLN</td>
       </tr>
     <% end %>
-    <tr><td colspan="5">
+    <tr><td colspan="6">
     &nbsp</td></tr>
   </tbody>
   <tfoot>
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td>SUMMARY:</td>

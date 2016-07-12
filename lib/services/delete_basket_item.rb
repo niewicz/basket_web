@@ -5,26 +5,31 @@ require_relative "./create_warehouse_item"
 module Shop
 
   class DeleteBasketItem
-    def call(product_id, quantity)
-      basket_item = FetchBasketItem.new.call(product_id)
+    def initialize(params)
+      @product_id = params.fetch("product_id").to_i
+      @quantity = params.fetch("quantity").to_i
+    end
 
-      return unless basket_item && basket_item.quantity >= quantity
+    def call
+      basket_item = FetchBasketItem.new.call(@product_id)
 
-      reduce_quantity(basket_item, quantity)
-      return_to_basket(product_id, quantity)
+      return unless basket_item && basket_item.quantity >= @quantity
+
+      reduce_quantity(basket_item)
+      return_to_basket
     end
 
     private
-    def reduce_quantity(basket_item, quantity)
-      if basket_item.quantity > quantity
-        basket_item.quantity -= quantity
+    def reduce_quantity(basket_item)
+      if basket_item.quantity > @quantity
+        basket_item.quantity -= @quantity
       else
         BASKET.delete(basket_item)
       end
     end
 
-    def return_to_basket(product_id, quantity)
-      CreateWarehouseItem.new.call(product_id, quantity)
+    def return_to_basket
+      CreateWarehouseItem.new.call(@product_id, @quantity)
     end
 
   end

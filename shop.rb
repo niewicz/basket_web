@@ -36,10 +36,16 @@ module Shop
 
     get "/basket" do
       basket_summary = FetchBasketSummary.new.call
+      p WAREHOUSE
       erb :"basket/show", locals: {basket_summary: basket_summary}
     end
 
-    post "/basket" do
+    post "/basket/delete" do
+      DeleteBasketItem.new(params).call
+      redirect "/"
+    end
+
+    post "/basket/create" do
       CreateBasketItem.new(params).call
       redirect "/"
     end

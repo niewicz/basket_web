@@ -6,7 +6,7 @@
   <p>PRICE: <%= "%.2f" % product.price %> PLN</p>
   <p>VAT: <%= "%.2f" % product.vat %></p>
   <p>QUANTITY: <%= quantity %></p>
-  <form action="/basket" method="post">
+  <form action="/basket/create" method="post">
     <input type="hidden" name="product_id" value="<%= product.id %>">
     <input type="number" name="quantity" value=1>
     <input type="submit" value="Add to basket">
