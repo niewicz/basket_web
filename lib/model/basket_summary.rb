@@ -7,7 +7,7 @@ module Shop
     attr_reader :products_list, :sum_net, :sum_gross
 
     def initialize
-      @products_list= []
+      @products_list = []
       create_products_list
       calculate_totals
       @sum_net = calc_sum_net
@@ -30,11 +30,11 @@ module Shop
     end
 
     def calc_sum_net
-      @products_list.map{ |list_item| list_item[:total_net] }.reduce(:+)
+      @products_list.map{ |list_item| list_item[:total_net] }.reduce(0, :+)
     end
 
     def calc_sum_gross
-      @products_list.map{ |list_item| list_item[:total_gross] }.reduce(:+)
+      @products_list.map{ |list_item| list_item[:total_gross] }.reduce(0, :+)
     end
   end
 

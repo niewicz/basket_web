@@ -17,7 +17,7 @@
         <td>
           <form action="/basket/delete" method="post">
             <input type="hidden" name="product_id" value="<%= list_item[:product].id %>">
-            <input type="hidden" name="quantity" value="<%= list_item[:quantity] %>">
+            <input type="number" name="quantity" value=1>
             <input type="submit" value="Remove">
           </form>
         </td>
