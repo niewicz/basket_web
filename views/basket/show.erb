@@ -6,16 +6,18 @@
       <th>Name</th>
       <th>Price</th>
       <th>Quantity</th>
-      <th>Total price</th>
+      <th>Total NET</th>
+      <th>Toral GROSS</th>
     </tr>
   </thead>
   <tbody>
-    <% basket.each do |basket_item| %>
+    <% basket_summary.products_list.each do |list_item| %>
       <tr>
-        <td><%= basket_item.get_details.name %></td>
-        <td><%= "%.2f" % basket_item.get_details.price %></td>
-        <td><%= basket_item.quantity %></td>
-        <td><%= "%.2f" % basket_item.total_net %></td>
+        <td><%= list_item[:product].name %></td>
+        <td><%= "%.2f" % list_item[:product].price %></td>
+        <td><%= list_item[:quantity] %></td>
+        <td><%= "%.2f" % list_item[:total_net] %></td>
+        <td><%= "%.2f" % list_item[:total_gross] %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,8 +25,9 @@
     <tr>
       <td></td>
       <td></td>
-      <td>Summary:</td>
-      <td></td>
+      <td>SUMMARY:</td>
+      <td><%= basket_summary.sum_net %></td>
+      <td><%= basket_summary.sum_gross %></td>
     </tr>
   </tfoot>
 </table>

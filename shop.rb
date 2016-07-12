@@ -31,8 +31,9 @@ module Shop
     end
 
     get "/basket" do
-      basket = FetchBasket.new.call
-      erb :"basket/show", locals: {basket: basket}
+      basket_summary = FetchBasketSummary.new.call
+      p basket_summary
+      erb :"basket/show", locals: {basket_summary: basket_summary}
     end
 
     post "/basket" do
