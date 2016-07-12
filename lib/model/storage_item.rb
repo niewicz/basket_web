@@ -1,6 +1,6 @@
 module Shop
 
-  class WarehouseItem
+  class StorageItem
     attr_reader :product_id
     attr_accessor :quantity
 

@@ -6,28 +6,30 @@
       <th>Name</th>
       <th>Price</th>
       <th>Quantity</th>
-      <th>Total NET</th>
-      <th>Toral GROSS</th>
+      <th>Total(net)</th>
+      <th>Total(gross)</th>
     </tr>
   </thead>
   <tbody>
     <% basket_summary.products_list.each do |list_item| %>
       <tr>
         <td><%= list_item[:product].name %></td>
-        <td><%= "%.2f" % list_item[:product].price %></td>
+        <td><%= "%.2f" % list_item[:product].price %> PLN</td>
         <td><%= list_item[:quantity] %></td>
-        <td><%= "%.2f" % list_item[:total_net] %></td>
-        <td><%= "%.2f" % list_item[:total_gross] %></td>
+        <td><%= "%.2f" % list_item[:total_net] %> PLN</td>
+        <td><%= "%.2f" % list_item[:total_gross] %> PLN</td>
       </tr>
     <% end %>
+    <tr><td colspan="5">
+    &nbsp</td></tr>
   </tbody>
   <tfoot>
     <tr>
       <td></td>
       <td></td>
       <td>SUMMARY:</td>
-      <td><%= basket_summary.sum_net %></td>
-      <td><%= basket_summary.sum_gross %></td>
+      <td><%= "%.2f" % basket_summary.sum_net %> PLN</td>
+      <td><%= "%.2f" % basket_summary.sum_gross %> PLN</td>
     </tr>
   </tfoot>
 </table>

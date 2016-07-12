@@ -1,4 +1,4 @@
-require_relative "../model/warehouse_item"
+require_relative "../model/storage_item"
 require_relative "./fetch_warehouse_item"
 
 module Shop
@@ -10,7 +10,7 @@ module Shop
       if warehouse_item
         warehouse_item.quantity += quantity
       else
-        WAREHOUSE << WarehouseItem.new(product_id, quantity)
+        WAREHOUSE << StorageItem.new(product_id, quantity)
       end
     end
   end

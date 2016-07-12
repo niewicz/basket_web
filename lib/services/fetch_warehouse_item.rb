@@ -1,4 +1,4 @@
-require_relative "../model/warehouse_item"
+require_relative "../model/storage_item"
 
 module Shop
 
