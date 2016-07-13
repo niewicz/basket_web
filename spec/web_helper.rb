@@ -4,11 +4,9 @@ require "rack/test"
 require_relative "../shop"
 
 module AppHelper
-
   def app
     Shop::App
   end
-
 end
 
 RSpec.configure do |config|

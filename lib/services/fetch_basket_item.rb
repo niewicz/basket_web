@@ -1,5 +1,4 @@
 module Shop
-
   class FetchBasketItem
     def call(product_id)
       return unless product_id
@@ -9,5 +8,4 @@ module Shop
       end
     end
   end
-
 end

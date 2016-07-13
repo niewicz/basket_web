@@ -1,5 +1,4 @@
 module Shop
-
   class StorageItem
     attr_reader :product_id
     attr_accessor :quantity
@@ -18,5 +17,4 @@ module Shop
       quantity
     end
   end
-
 end

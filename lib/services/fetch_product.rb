@@ -1,7 +1,6 @@
 require_relative "../model/product"
 
 module Shop
-
   class FetchProduct
     def call(id)
       return unless id
@@ -11,5 +10,4 @@ module Shop
       end
     end
   end
-
 end

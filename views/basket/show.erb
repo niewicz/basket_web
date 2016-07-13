@@ -24,8 +24,8 @@
         <td><%= list_item[:product].name %></td>
         <td><%= "%.2f" % list_item[:product].price %> PLN</td>
         <td><%= list_item[:quantity] %></td>
-        <td><%= "%.2f" % list_item[:total_net] %> PLN</td>
-        <td><%= "%.2f" % list_item[:total_gross] %> PLN</td>
+        <td><%= "%.2f" % list_item[:net] %> PLN</td>
+        <td><%= "%.2f" % list_item[:gross] %> PLN</td>
       </tr>
     <% end %>
     <tr><td colspan="6">

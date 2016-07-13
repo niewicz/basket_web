@@ -1,5 +1,4 @@
 module Shop
-
   class Product
     attr_reader :id, :name, :price, :vat
     @@id = 0
@@ -28,5 +27,4 @@ module Shop
       vat
     end
   end
-
 end

@@ -3,7 +3,6 @@ require_relative "./fetch_basket_item"
 require_relative "./delete_warehouse_item"
 
 module Shop
-
   class CreateBasketItem
     def initialize(params)
       @product_id = params.fetch("product_id").to_i
@@ -21,5 +20,4 @@ module Shop
       end
     end
   end
-
 end

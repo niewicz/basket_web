@@ -1,7 +1,6 @@
 require_relative "../model/storage_item"
 
 module Shop
-
   class FetchWarehouseItem
     def call(product_id)
       return unless product_id
@@ -11,5 +10,4 @@ module Shop
       end
     end
   end
-
 end

@@ -4,7 +4,6 @@ require "sinatra"
 Dir["./lib/**/*.rb"].each { |file| require file }
 
 module Shop
-
   PORTFOLIO = [
     Product.new("Harry Potter and the Order of the Pheonix", 34.50, 0.08),
     Product.new("English Dictionary", 18.20, 0.23),
@@ -26,16 +25,19 @@ module Shop
   class App < Sinatra::Base
     get "/" do
       portfolio = FetchPortfolio.new.call
-      erb :"products/index", locals: {portfolio: portfolio, title: "Our products"}
+      erb :"products/index", locals:
+        {portfolio: portfolio, title: "Our products"}
     end
 
     get "/products/:id" do |id|
       product = FetchProduct.new.call(id)
       warehouse_item = FetchWarehouseItem.new.call(id)
       if warehouse_item
-        erb :"products/show", locals: {product: product, quantity: warehouse_item.quantity}
+        erb :"products/show", locals:
+          {product: product, quantity: warehouse_item.quantity}
       else
-        erb :"products/errors/not_available", locals: {product: product}
+        erb :"products/errors/not_available", locals:
+          {product: product}
       end
     end
 
@@ -44,7 +46,8 @@ module Shop
         erb :"basket/empty"
       else
         basket_summary = FetchBasketSummary.new.call
-        erb :"basket/show", locals: {basket_summary: basket_summary}
+        erb :"basket/show", locals:
+          {basket_summary: basket_summary}
       end
     end
 
@@ -66,5 +69,4 @@ module Shop
       end
     end
   end
-
 end
