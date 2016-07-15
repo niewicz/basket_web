@@ -5,11 +5,13 @@ Dir["./lib/**/*.rb"].each { |file| require file }
 
 module Shop
   PORTFOLIO = [
-    Product.new("Harry Potter and the Order of the Pheonix", 34.50, 0.08),
-    Product.new("English Dictionary", 18.20, 0.23),
-    Product.new("Twilight", 23.40, 0.23),
-    Product.new("Futu.re", 39.90, 0.23),
-    Product.new("Fairytales vol.2", 19.40, 0.23)
+    Product.new("Harry Potter and the Order of the Pheonix", 34.50, 8, "J. K. Rowling", "Harry_Potter_and_the_Order_of_the_Phoenix.jpg"),
+    Product.new("Harry Potter and the Half-Blood Prince", 29.20, 8, "J. K. Rowling", "Harry_Potter_and_the_Half-Blood_Prince.jpg"),
+    Product.new("Harry Potter and the Philosopher's Stone", 23.40, 8, "J. K. Rowling", "Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg"),
+    Product.new("The Girl on the Train", 39.90, 8, "Paula Hawkins", "the_girl_on_the_train.jpg"),
+    Product.new("Gone Girl", 19.40, 8, "Gillian Flynn", "gone_girl.jpg"),
+    Product.new("The C Programming Language", 74.12, 8, "Brian W. Kernighan, Dennis M. Ritchie", "c_programming_book.png"),
+    Product.new("Under the Dome", 29.40, 8, "Stephen King", "under_the_dome.jpg")
   ]
 
   WAREHOUSE = [
@@ -17,7 +19,7 @@ module Shop
     StorageItem.new(2, 1),
     StorageItem.new(3, 2),
     StorageItem.new(4, 100),
-    StorageItem.new(5, 5),
+    StorageItem.new(5, 5)
   ]
 
   BASKET = []
@@ -26,18 +28,18 @@ module Shop
     get "/" do
       portfolio = FetchPortfolio.new.call
       erb :"products/index", locals:
-        {portfolio: portfolio, title: "Our products"}
+        { portfolio: portfolio, title: "Our products" }
     end
 
     get "/products/:id" do |id|
       product = FetchProduct.new.call(id)
-      warehouse_item = FetchWarehouseItem.new.call(id)
-      if warehouse_item
+      if product
+        warehouse_item = FetchWarehouseItem.new.call(id)
         erb :"products/show", locals:
-          {product: product, quantity: warehouse_item.quantity}
+          { product: product, quantity: (warehouse_item ? warehouse_item.quantity : 0) }
       else
-        erb :"products/errors/not_available", locals:
-          {product: product}
+        status 404
+        erb :"page_not_found"
       end
     end
 
@@ -47,7 +49,7 @@ module Shop
       else
         basket_summary = FetchBasketSummary.new.call
         erb :"basket/show", locals:
-          {basket_summary: basket_summary}
+          { basket_summary: basket_summary }
       end
     end
 
@@ -60,9 +62,14 @@ module Shop
       end
     end
 
-    post "/basket/create" do
+    post "/basket/delete_all" do
+      DeleteAllBasketItem.new.call
+      redirect "/basket"
+    end
+
+    post "/basket/add" do
       begin
-        CreateBasketItem.new(params).call
+        AddBasketItem.new(params).call
         redirect "/basket"
       rescue KeyError
         halt 422

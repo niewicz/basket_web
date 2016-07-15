@@ -2,7 +2,7 @@ require_relative "../model/storage_item"
 require_relative "./fetch_warehouse_item"
 
 module Shop
-  class CreateWarehouseItem
+  class AddWarehouseItem
     def call(product_id, quantity)
       warehouse_item = FetchWarehouseItem.new.call(product_id)
 

@@ -4,17 +4,14 @@ module Shop
     attr_accessor :quantity
 
     def initialize(product_id, quantity)
-      @product_id = check_product_id(product_id)
-      @quantity = check_quantity(quantity)
+      @product_id = check_positive_numeric(product_id)
+      @quantity = check_positive_numeric(quantity)
     end
 
     private
-    def check_product_id(product_id)
-      product_id
-    end
-
-    def check_quantity(quantity)
-      quantity
+    def check_positive_numeric(var_to_check)
+      raise ArgumentError unless var_to_check.is_a?(Numeric) && var_to_check > 0
+      var_to_check
     end
   end
 end

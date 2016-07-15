@@ -1,31 +1,29 @@
 <html>
-
   <head>
-    <title>Shop</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>booking.shop</title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/application.css" rel="stylesheet">
   </head>
-
-
-  <body>
-    <header>
-      <h1>My Shop</h1>
-      <hr size=2>
-    </header>
-
-    <nav>
-      <a href="/"> <input type="button" value="HOME"> </a>
-      <a href="/basket"> <input type="button" value="BASKET"> </a>
+  <body class="container">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse my-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand my-navbar-header" href="/"><span class="glyphicon glyphicon-book"></span> booking.shop</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" style="float: right">
+            <li>
+              <a href="/"><button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> home</button></a>
+            </li>
+            <li>
+              <a href="/basket"><button class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> basket</button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-
-    <article>
-      <hr size=2>
+    <article class="under-navbar">
       <%= yield %>
     </article>
-
-    <footer>
-    <hr size=2>
-      This is footer
-    </footer>
   </body>
-
 </html>

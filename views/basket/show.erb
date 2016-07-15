@@ -1,44 +1,51 @@
-<h2> Basket </h2>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total(net)</th>
-      <th>Total(gross)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% basket_summary.products_list.each do |list_item| %>
-      <tr>
-        <td>
-          <form action="/basket/delete" method="post">
-            <input type="hidden" name="product_id" value="<%= list_item[:product].id %>">
-            <input type="number" name="quantity" value=1>
-            <input type="submit" value="Remove">
-          </form>
-        </td>
-        <td><%= list_item[:product].name %></td>
-        <td><%= "%.2f" % list_item[:product].price %> PLN</td>
-        <td><%= list_item[:quantity] %></td>
-        <td><%= "%.2f" % list_item[:net] %> PLN</td>
-        <td><%= "%.2f" % list_item[:gross] %> PLN</td>
-      </tr>
-    <% end %>
-    <tr><td colspan="6">
-    &nbsp</td></tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>SUMMARY:</td>
-      <td><%= "%.2f" % basket_summary.sum_net %> PLN</td>
-      <td><%= "%.2f" % basket_summary.sum_gross %> PLN</td>
-    </tr>
-  </tfoot>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Basket summary</h1>
+  </div>
+  <div class="panel-body">
+    <table class="table" width="100%">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>with VAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% basket_summary.products_list.each do |list_item| %>
+          <tr>
+            <td>
+              <form action="/basket/delete" method="post">
+                <input type="hidden" name="product_id" value="<%= list_item[:product].id %>">
+                <input class="btn btn-default" type="number" name="quantity" value=1 min="1" max="<%= list_item[:quantity] %>">
+                <input class="btn btn-default" type="submit" value="Remove">
+              </form>
+            </td>
+            <td><%= list_item[:product].title %></td>
+            <td><%= "%.2f" % list_item[:product].price %> EUR</td>
+            <td><%= list_item[:quantity] %></td>
+            <td><%= "%.2f" % list_item[:net] %> EUR</td>
+            <td><%= "%.2f" % list_item[:gross] %> EUR</td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <form action="/basket/delete_all" method="post">
+              <input class="btn btn-primary" type="submit" value="Remove all">
+            </form>
+          </td>
+          <td></td>
+          <td></td>
+          <td>SUMMARY:</td>
+          <td><%= "%.2f" % basket_summary.sum_net %> EUR</td>
+          <td><%= "%.2f" % basket_summary.sum_gross %> EUR</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

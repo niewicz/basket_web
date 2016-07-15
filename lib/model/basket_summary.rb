@@ -26,7 +26,7 @@ module Shop
     def calculate_total_prices
       @products_list.each do |list_item|
         list_item[:net] = list_item[:product].price * list_item[:quantity]
-        list_item[:gross] = list_item[:net] * (1 + list_item[:product].vat)
+        list_item[:gross] = list_item[:net] * (1 + list_item[:product].vat / 100.0)
       end
     end
 

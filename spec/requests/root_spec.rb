@@ -13,15 +13,7 @@ RSpec.describe "GET /", type: :request do
     expect(last_response.status).to eql(200)
   end
 
-  it "returns title" do
-    expect(last_response.body).to include("<title>Shop<\/title>")
-  end
-
-  it "returns link to basket" do
-    expect(last_response.body).to match("<a\ href=\"\/basket\">.*BASKET.*<\/a>")
-  end
-
   it "return list of products" do
-    expect(last_response.body).to match("<ul>(\\s*<li>\\s*.*\\s*.*<\/li>\\s*)*<\/ul>")
+    expect(last_response.body).to match(Regexp.new("<ul.*>(.*<li.*>.*<\/li>.*)*<\/ul>", Regexp::MULTILINE))
   end
 end

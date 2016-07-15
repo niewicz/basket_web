@@ -1,11 +1,14 @@
-<h2> <%= title %> </h2>
-
-<div>
-  <ul>
-    <% portfolio.each do |product| %>
-      <li>
-        <a href="/products/<%= product.id %>"><%= product.name %></a>
-      </li>
-    <% end %>
-  </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= title %></h2>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% portfolio.each do |product| %>
+        <li class="list-group-item">
+          <a href="/products/<%= product.id %>"><%= product.title %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>

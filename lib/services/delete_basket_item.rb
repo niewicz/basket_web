@@ -1,6 +1,6 @@
 require_relative "../model/storage_item"
 require_relative "./fetch_basket_item"
-require_relative "./create_warehouse_item"
+require_relative "./add_warehouse_item"
 
 module Shop
   class DeleteBasketItem
@@ -28,7 +28,7 @@ module Shop
     end
 
     def return_to_basket
-      CreateWarehouseItem.new.call(@product_id, @quantity)
+      AddWarehouseItem.new.call(@product_id, @quantity)
     end
   end
 end

@@ -1,14 +1,55 @@
-<h2> Product's specification </h2>
-
-<div>
-  <p>PRODUCT_ID: <%= product.id %></p>
-  <p>NAME: <%= product.name %></p>
-  <p>PRICE: <%= "%.2f" % product.price %> PLN</p>
-  <p>VAT: <%= "%.2f" % product.vat %></p>
-  <p>QUANTITY: <%= quantity %></p>
-  <form action="/basket/create" method="post">
-    <input type="hidden" name="product_id" value="<%= product.id %>">
-    <input type="number" name="quantity" value=1>
-    <input type="submit" value="Add to basket">
-  </form>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-4">
+        <p><img src="/img/<%= product.img_address %>" class="img-responsive center-block"></p>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default my-panel-title">
+              <div class="panel-body product-img-container">
+                <h3><i><%= product.title %></i></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-body product-img-container">
+                <h4><%= product.author %></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-body product-img-container">
+                <%= "%.2f" % product.price %> EUR + <%= product.vat %>% VAT
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 product-img-container">
+            <% if quantity > 0 %>
+              <form action="/basket/add" method="post">
+                <input type="hidden" name="product_id" value="<%= product.id %>">
+                <input class="btn btn-default btn-lg" type="number" name="quantity" value="1" min="1" max="<%= quantity %>">
+                <input class="btn btn-success btn-lg" type="submit" value="Add to basket">
+              </form>
+            <% else %>
+              <div class="panel panel-default not-available">
+                <div class="panel-body product-img-container">
+                  <h4>not available</h4>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
