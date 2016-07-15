@@ -5,8 +5,8 @@ require_relative "./add_warehouse_item"
 module Shop
   class DeleteBasketItem
     def initialize(params)
-      @product_id = params.fetch("product_id").to_i
       @quantity = params.fetch("quantity").to_i
+      @product_id = check_id(params.fetch("product_id").to_i)
     end
 
     def call
@@ -29,6 +29,11 @@ module Shop
 
     def return_to_basket
       AddWarehouseItem.new.call(@product_id, @quantity)
+    end
+
+    private
+    def check_id(id)
+      raise ArgumentError unless id > 0
     end
   end
 end

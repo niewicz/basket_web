@@ -19,7 +19,7 @@ module Shop
       basket.each do |basket_item|
         product = FetchProduct.new.call(basket_item.product_id)
         quantity = basket_item.quantity
-        @products_list << {product: product, quantity: quantity, net: 0, gross: 0}
+        @products_list << { product: product, quantity: quantity, net: 0, gross: 0 }
       end
     end
 
@@ -31,11 +31,11 @@ module Shop
     end
 
     def calculate_sum_net
-      @products_list.map{ |list_item| list_item[:net] }.reduce(0, :+)
+      @products_list.map { |list_item| list_item[:net] } .reduce(0, :+)
     end
 
     def calculate_sum_gross
-      @products_list.map{ |list_item| list_item[:gross] }.reduce(0, :+)
+      @products_list.map { |list_item| list_item[:gross] } .reduce(0, :+)
     end
   end
 end

@@ -10,7 +10,7 @@ module Shop
 
     private
     def check_positive_numeric(var_to_check)
-      raise ArgumentError unless var_to_check.is_a?(Numeric) && var_to_check > 0
+      raise ArgumentError unless var_to_check.is_a?(Integer) && var_to_check > 0
       var_to_check
     end
   end
